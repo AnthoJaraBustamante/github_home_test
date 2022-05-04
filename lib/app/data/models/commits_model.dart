@@ -1,5 +1,7 @@
 import 'dart:convert';
 
+import 'package:github_home_test/app/ui/utils/format_date.dart';
+
 List<Commits> commitsFromJson(String str) =>
     List<Commits>.from(json.decode(str).map((x) => Commits.fromJson(x)));
 
@@ -158,6 +160,9 @@ class Commit {
   final int commentCount;
   final Verification verification;
 
+  String get messageShort => message.substring(0, 10);
+  List<String> get splitMessage => message.split('\n');
+
   factory Commit.fromJson(Map<String, dynamic> json) => Commit(
         author: CommitAuthorClass.fromJson(json["author"]),
         committer: CommitAuthorClass.fromJson(json["committer"]),
@@ -189,6 +194,10 @@ class CommitAuthorClass {
   final String name;
   final String email;
   final DateTime date;
+
+  String get dateFormat {
+    return formatEEEEddMMMMYYYY(date);
+  }
 
   factory CommitAuthorClass.fromJson(Map<String, dynamic> json) =>
       CommitAuthorClass(
