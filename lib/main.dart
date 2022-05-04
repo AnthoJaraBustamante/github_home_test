@@ -7,12 +7,12 @@ import 'package:github_home_test/app/ui/pages/home_page/bindings/home_binding.da
 import 'package:github_home_test/app/ui/pages/home_page/home_page.dart';
 import 'package:github_home_test/app/ui/theme/app_theme.dart';
 import 'package:github_home_test/app/ui/utils/dependency_injection.dart';
-import 'package:url_strategy/url_strategy.dart';
+ 
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
   DependencyInjection.init();
-  setPathUrlStrategy();
+ 
   runApp(const MyApp());
 }
 

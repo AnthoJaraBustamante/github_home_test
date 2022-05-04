@@ -9,7 +9,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import './controllers/home_controller.dart';
-import 'local_widgets/gif_refresher.dart';
+ 
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -22,54 +22,59 @@ class HomePage extends StatelessWidget {
         init: HomeController(),
         id: 'commits',
         builder: (_) {
-          return _.loading
-              ? const LoadingGit()
-              : Column(
-                  children: [
-                    const SafeArea(child: SizedBox(height: 30)),
-                    Wrap(
-                      children: const [
-                        Icon(Icons.book_outlined),
-                        SizedBox(width: 10),
-                        GitHubUser(),
-                        Text(' / '),
-                        GitHubProyect(),
-                      ],
-                    ),
-                    const SizedBox(height: 40),
-                    // Container(
-                    //   color: Colors.red,
-                    //   height: 80,
-                    //   width: double.infinity,
-                    //   child: const Center(
-                    //     child: Text('Commits'),
-                    //   ),
-                    // ),
-                    Expanded(
-                      child: SmartRefresher(
-                        header:   GifHeader1(),
-                        // header: WaterDropHeader(),
-                        controller: _.refreshController,
-                            onRefresh: _.onRefresh,
-                        child: ListView.builder(
-                          physics: const BouncingScrollPhysics(),
-                          itemCount: _.commits.length,
-                          itemBuilder: (__, index) {
-                            final Commits commit = _.commits[index];
-                            return SlideInLeft(
-                                delay: Duration(milliseconds: index * 50),
-                                child: Column(
-                                  children: [
-                                    CustomedTile(commit: commit),
-                                    const Divider(),
-                                  ],
-                                ));
-                          },
+          if (_.loading) {
+            return const LoadingGit();
+          } else {
+            return _.commits.isEmpty
+                ? Center(child: ZoomIn(child: const Text('No commits found')))
+                : Column(
+                    children: [
+                      const SafeArea(child: SizedBox(height: 30)),
+                      Wrap(
+                        children: const [
+                          Icon(Icons.book_outlined),
+                          SizedBox(width: 10),
+                          GitHubUser(),
+                          Text(' / '),
+                          GitHubProyect(),
+                        ],
+                      ),
+                      const SizedBox(height: 40),
+                      // Container(
+                      //   color: Colors.red,
+                      //   height: 80,
+                      //   width: double.infinity,
+                      //   child: const Center(
+                      //     child: Text('Commits'),
+                      //   ),
+                      // ),
+                      Expanded(
+                        child: SmartRefresher(
+                          // header: GifHeader1(),
+                          header: WaterDropHeader(),
+                          controller: _.refreshController,
+                          onRefresh: _.onRefresh,
+                          child: ListView.builder(
+                            physics: const BouncingScrollPhysics(),
+                            itemCount: _.commits.length,
+                            itemBuilder: (__, index) {
+                              final Commits commit = _.commits[index];
+
+                              return SlideInLeft(
+                                  delay: Duration(milliseconds: index * 50),
+                                  child: Column(
+                                    children: [
+                                      CustomedTile(commit: commit),
+                                      const Divider(),
+                                    ],
+                                  ));
+                            },
+                          ),
                         ),
                       ),
-                    ),
-                  ],
-                );
+                    ],
+                  );
+          }
         },
       )),
     );
@@ -138,7 +143,6 @@ class CustomedTile extends StatelessWidget {
           ),
           Text(
             commit.commit.author.commitedAt,
-            
             style: GoogleFonts.blinker(
               color: const Color(0xff8b949e),
               // fontWeight: FontWeight.w2300,

@@ -19,7 +19,7 @@ class HomeController extends GetxController {
     final CommitsService _service = Get.find<CommitsService>();
     var response = await _service.getService();
     commits = response['data'] as List<Commits>;
-    loading = false;
+    loading = false; 
     update(['commits']);
   }
 

@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 
 class LoadingGit extends StatelessWidget {
@@ -12,7 +13,7 @@ class LoadingGit extends StatelessWidget {
       children: [
         const Spacer(),
         Expanded(
-          child: Image.asset('assets/mona-loading-dark.gif'),
+          child: ZoomIn(child: Image.asset('assets/mona-loading-dark.gif')),
         ),
         Container(
           width: double.infinity,

@@ -104,13 +104,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_gifimage:
-    dependency: "direct main"
-    description:
-      name: flutter_gifimage
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.1"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -397,13 +390,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.0.0"
-  url_strategy:
-    dependency: "direct main"
-    description:
-      name: url_strategy
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.2.0"
   vector_math:
     dependency: transitive
     description:
