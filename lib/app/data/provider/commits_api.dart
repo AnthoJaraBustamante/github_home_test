@@ -25,13 +25,13 @@ class CommitsApi {
         'data': <Commits>[],
         'success': false,
       };
-    } on DioError catch (e) {
+    } on DioError catch (e) { 
       const String checkInternetMessage =
           'Revise su conexión a Internet y vuelva a intentarlo.';
       return <String, dynamic>{
         'message': e.type.name == 'other'
             ? checkInternetMessage
-            : e.type.name == 'connectTimeout'
+            : e.type.name == 'connectTimeout' 
                 ? 'Se acabo el tiempo de espera. $checkInternetMessage'
                 : e.message,
         'data': <Commits>[],

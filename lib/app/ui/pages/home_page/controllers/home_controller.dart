@@ -8,6 +8,8 @@ class HomeController extends GetxController {
   bool loading = true;
 
   RefreshController refreshController = RefreshController();
+ 
+ 
   @override
   void onInit() {
     // TODO: implement onInit
@@ -19,12 +21,17 @@ class HomeController extends GetxController {
     final CommitsService _service = Get.find<CommitsService>();
     var response = await _service.getService();
     commits = response['data'] as List<Commits>;
+    print(response['message']);
     loading = false; 
-    update(['commits']);
+    update(['commits']); 
   }
 
-  Future<void>  onRefresh() async {
+  Future<void>  onRefresh() async { 
     await loadCommits(); 
     refreshController.refreshCompleted();
   }
+
+ 
+
+ 
 }

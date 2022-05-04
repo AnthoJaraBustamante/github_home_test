@@ -27,7 +27,7 @@ class GitHubUser extends StatelessWidget {
     Key? key,
   }) : super(key: key);
 
-  @override
+  @override 
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () => launchUrlString('https://github.com/${Const.user}'),

@@ -31,6 +31,10 @@ class Commits {
   final CommitAuthor committer;
   final List<Parent> parents;
 
+  String get treeUrl {
+   return htmlUrl.replaceAll('/commit/', '/tree/');
+  }
+
   factory Commits.fromJson(Map<String, dynamic> json) => Commits(
         sha: json["sha"],
         nodeId: json["node_id"],
