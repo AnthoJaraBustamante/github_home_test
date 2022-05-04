@@ -10,7 +10,7 @@ class ColorTheme {
   static const Color secondaryLight = Color(0xFFB20000);
   static const Color secondaryVariant = Color(0xFFB20000);
 
-  static const Color dark = Color(0xFF21262d);
+  static const Color dark = Color(0xFF0D1117);
   static const Color light = Color(0xFFFFFFFF);
 
   static Map<int, Color> primaryMap = {

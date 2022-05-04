@@ -190,7 +190,7 @@ class CommitAuthorClass {
     required this.email,
     required this.date,
   });
-
+ 
   final String name;
   final String email;
   final DateTime date;

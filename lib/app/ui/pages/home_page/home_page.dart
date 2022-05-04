@@ -5,9 +5,11 @@ import 'package:github_home_test/app/data/models/commits_model.dart';
 import 'package:github_home_test/app/ui/pages/home_page/local_widgets/github_profile_proyect.dart';
 import 'package:github_home_test/app/ui/pages/home_page/local_widgets/loading_widget.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import './controllers/home_controller.dart';
+import 'local_widgets/gif_refresher.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -44,20 +46,26 @@ class HomePage extends StatelessWidget {
                     //   ),
                     // ),
                     Expanded(
-                      child: ListView.builder(
-                        physics: const BouncingScrollPhysics(),
-                        itemCount: _.commits.length,
-                        itemBuilder: (__, index) {
-                          final Commits commit = _.commits[index];
-                          return SlideInLeft(
-                              delay: Duration(milliseconds: index * 50),
-                              child: Column(
-                                children: [
-                                  CustomedTile(commit: commit),
-                                  const Divider(),
-                                ],
-                              ));
-                        },
+                      child: SmartRefresher(
+                        header:   GifHeader1(),
+                        // header: WaterDropHeader(),
+                        controller: _.refreshController,
+                            onRefresh: _.onRefresh,
+                        child: ListView.builder(
+                          physics: const BouncingScrollPhysics(),
+                          itemCount: _.commits.length,
+                          itemBuilder: (__, index) {
+                            final Commits commit = _.commits[index];
+                            return SlideInLeft(
+                                delay: Duration(milliseconds: index * 50),
+                                child: Column(
+                                  children: [
+                                    CustomedTile(commit: commit),
+                                    const Divider(),
+                                  ],
+                                ));
+                          },
+                        ),
                       ),
                     ),
                   ],
