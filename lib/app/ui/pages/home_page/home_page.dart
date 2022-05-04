@@ -18,6 +18,7 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Scaffold(
       body: GetBuilder<HomeController>(
         init: HomeController(),
@@ -28,39 +29,42 @@ class HomePage extends StatelessWidget {
           } else {
             return _.commits.isEmpty
                 ? Center(child: ZoomIn(child: const Text('No commits found')))
-                : Column(
-                    children: [
-                      const SafeArea(child: SizedBox(height: 30)),
-                      Wrap(
-                        children: const [
-                          Icon(
-                            Icons.book_outlined,
-                            size: 18,
-                          ),
-                          SizedBox(width: 10),
-                          GitHubUser(),
-                          Text(' / '),
-                          GitHubProyect(),
-                        ],
-                      ),
-                      const SizedBox(height: 40),
-                      Expanded(
-                        child: SmartRefresher(
-                          controller: _.refreshController,
-                          onRefresh: _.onRefresh,
-                          child: ListView.builder(
-                            physics: const BouncingScrollPhysics(),
-                            itemCount: _.commits.length,
-                            itemBuilder: (__, index) {
-                              final Commits commit = _.commits[index];
+                : Container(
+                  margin: EdgeInsets.symmetric(horizontal: size.width > 1000 ? size.width * 0.1 : 0),
+                  child: Column(
+                      children: [
+                        const SafeArea(child: SizedBox(height: 30)),
+                        Wrap(
+                          children: const [
+                            Icon(
+                              Icons.book_outlined,
+                              size: 18,
+                            ),
+                            SizedBox(width: 10),
+                            GitHubUser(),
+                            Text(' / '),
+                            GitHubProyect(),
+                          ],
+                        ),
+                        const SizedBox(height: 40),
+                        Expanded(
+                          child: SmartRefresher(
+                            controller: _.refreshController,
+                            onRefresh: _.onRefresh,
+                            child: ListView.builder(
+                              physics: const BouncingScrollPhysics(),
+                              itemCount: _.commits.length,
+                              itemBuilder: (__, index) {
+                                final Commits commit = _.commits[index];
 
-                              return CustomedTile(commit: commit);
-                            },
+                                return CustomedTile(commit: commit);
+                              },
+                            ),
                           ),
                         ),
-                      ),
-                    ],
-                  );
+                      ],
+                    ),
+                );
           }
         },
       ),
