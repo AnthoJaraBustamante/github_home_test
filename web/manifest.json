@@ -1,11 +1,11 @@
 {
-    "name": "github_home_test",
-    "short_name": "github_home_test",
+    "name": "Github API",
+    "short_name": "Commit History",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#0D1117",
+    "theme_color": "#0D1117",
+    "description": "A commit-based version control system for GitHub.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
