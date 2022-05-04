@@ -1,3 +1,4 @@
+import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:github_home_test/app/data/models/commits_model.dart';
@@ -89,21 +90,34 @@ class CustomedTile extends StatelessWidget {
         children: [
           Row(
             children: [
-              CircleAvatar(
-                radius: 13,
-                backgroundImage: NetworkImage(
-                  commit.author.avatarUrl,
+              ZoomIn(
+                delay: const Duration(milliseconds:300),
+                
+                child: CircleAvatar(
+                  radius: 10,
+                  backgroundImage: NetworkImage(
+                    commit.author.avatarUrl,
+                  ),
                 ),
               ),
               const SizedBox(width: 5),
-              Expanded(child: Text(commit.commit.author.name)),
+              Expanded(
+                child: SlideInLeft(
+                delay: const Duration(milliseconds:400),
+                  from: 30,
+                  child: Text(commit.commit.author.name),
+                ),
+              ),
             ],
           ),
-          Text(commit.commit.author.dateFormat),
+          SlideInUp(
+            from: 5,
+            child: Text(commit.commit.author.dateFormat)),
         ],
       ),
       dense: true,
-      leading: Text(commit.commit.author.dateFormat),
+      leading: const Icon(Icons.commit_outlined),
+      trailing: const Icon(Icons.keyboard_arrow_right_outlined),
       // isThreeLine: true,
       onTap: () => launchUrl(Uri.parse(commit.htmlUrl)),
     );
