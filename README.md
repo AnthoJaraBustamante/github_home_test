@@ -28,5 +28,5 @@ Once the latest Flutter version has been installed, type the following command l
 
 ## Screenshots
 
-![Splash Page](screen_shots/splash_screen.jpg.png)
-![Home Page](screen_shots/home_screen.jpg.png)
+![Splash Page](screen_shots/splash_screen.jpg)
+![Home Page](screen_shots/home_screen.jpg)
