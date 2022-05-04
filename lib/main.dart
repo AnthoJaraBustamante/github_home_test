@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:github_home_test/app/routes/app_pages.dart';
+import 'package:github_home_test/app/translation/localizations_delegates.dart';
+import 'package:github_home_test/app/translation/supported_locales.dart';
 import 'package:github_home_test/app/ui/pages/home_page/bindings/home_binding.dart';
 import 'package:github_home_test/app/ui/pages/home_page/home_page.dart';
 import 'package:github_home_test/app/ui/theme/app_theme.dart';
@@ -12,7 +14,6 @@ void main() {
   DependencyInjection.init();
   setPathUrlStrategy();
   runApp(const MyApp());
-
 }
 
 class MyApp extends StatelessWidget {
@@ -23,9 +24,11 @@ class MyApp extends StatelessWidget {
       title: 'Github Home Test Commits',
       debugShowCheckedModeBanner: false,
       home: const HomePage(),
-      theme: AppTheme.themeData,
+      theme: AppTheme.darkThemeData,
       initialBinding: HomeBinding(),
       getPages: AppPages.pages,
+      localizationsDelegates: LocalizationDelegates.delegates,
+      supportedLocales: SupportedLocales.locale,
     );
   }
 }
