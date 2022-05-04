@@ -49,7 +49,14 @@ class HomePage extends StatelessWidget {
                         itemCount: _.commits.length,
                         itemBuilder: (__, index) {
                           final Commits commit = _.commits[index];
-                          return CustomedTile(commit: commit);
+                          return SlideInLeft(
+                              delay: Duration(milliseconds: index * 50),
+                              child: Column(
+                                children: [
+                                  CustomedTile(commit: commit),
+                                  const Divider(),
+                                ],
+                              ));
                         },
                       ),
                     ),
@@ -76,13 +83,22 @@ class CustomedTile extends StatelessWidget {
       splitMessage.first += '...';
     }
     return ListTile(
-      title: Text(
-        splitMessage.first,
-        style: GoogleFonts.blinker(
-          // c9d1d9
-          color: const Color(0xffc9d1d9),
-          fontWeight: FontWeight.w600,
-          fontSize: 14,
+      title: SlideInDown(
+        from: 5,
+        child: Row(
+          children: [
+            Expanded(
+              child: Text(
+                splitMessage.first,
+                style: GoogleFonts.blinker(
+                  // c9d1d9
+                  color: const Color(0xffc9d1d9),
+                  fontWeight: FontWeight.w600,
+                  fontSize: 14,
+                ),
+              ),
+            ),
+          ],
         ),
       ),
       subtitle: Column(
@@ -91,8 +107,7 @@ class CustomedTile extends StatelessWidget {
           Row(
             children: [
               ZoomIn(
-                delay: const Duration(milliseconds:300),
-                
+                delay: const Duration(milliseconds: 300),
                 child: CircleAvatar(
                   radius: 10,
                   backgroundImage: NetworkImage(
@@ -102,22 +117,33 @@ class CustomedTile extends StatelessWidget {
               ),
               const SizedBox(width: 5),
               Expanded(
-                child: SlideInLeft(
-                delay: const Duration(milliseconds:400),
-                  from: 30,
-                  child: Text(commit.commit.author.name),
+                child: Text(
+                  commit.commit.author.name,
+                  style: GoogleFonts.blinker(
+                    color: const Color(0xffc9d1d9),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                  ),
                 ),
               ),
             ],
           ),
-          SlideInUp(
-            from: 5,
-            child: Text(commit.commit.author.dateFormat)),
+          Text(
+            commit.commit.author.commitedAt,
+            
+            style: GoogleFonts.blinker(
+              color: const Color(0xff8b949e),
+              // fontWeight: FontWeight.w2300,
+              fontSize: 11,
+            ),
+          ),
         ],
       ),
       dense: true,
       leading: const Icon(Icons.commit_outlined),
       trailing: const Icon(Icons.keyboard_arrow_right_outlined),
+      horizontalTitleGap: 2,
+
       // isThreeLine: true,
       onTap: () => launchUrl(Uri.parse(commit.htmlUrl)),
     );

@@ -195,15 +195,34 @@ class CommitAuthorClass {
   final String email;
   final DateTime date;
 
-  String get dateFormat {
+  String get dateFormatted {
     return formatEEEEddMMMMYYYY(date);
+  }
+
+  String get commitedAt {
+    // difference between now and date
+    final now = DateTime.now();
+    final difference = now.difference(date);
+    if (difference.inDays > 0) {
+      return 'commited ' + difference.inDays.toString() + ' days ago';
+    }
+    if (difference.inHours > 0) {
+      return 'commited ' + difference.inHours.toString() + ' hours ago';
+    }
+    if (difference.inMinutes > 0) {
+      return 'commited ' + difference.inMinutes.toString() + ' minutes ago';
+    }
+    if (difference.inSeconds > 0) {
+      return 'commited ' + difference.inSeconds.toString() + ' seconds ago';
+    }
+    return 'commited ' + difference.inDays.toString();
   }
 
   factory CommitAuthorClass.fromJson(Map<String, dynamic> json) =>
       CommitAuthorClass(
         name: json["name"],
         email: json["email"],
-        date: DateTime.parse(json["date"]),
+        date: DateTime.parse((json["date"])),
       );
 
   Map<String, dynamic> toJson() => {
