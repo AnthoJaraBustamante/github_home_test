@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
-
-void main() => runApp(const MyApp());
+import 'package:url_strategy/url_strategy.dart';
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  setPathUrlStrategy();
+  runApp(const MyApp());
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
@@ -14,7 +18,7 @@ class MyApp extends StatelessWidget {
           title: const Text('Material App Bar'),
         ),
         body: const Center(
-          child:  Text('Hello World'),
+          child: Text('Hello World'),
         ),
       ),
     );
